@@ -1,12 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        remotePatterns: [
-            {
-                hostname: 'replicate.delivery',
-                protocol: 'https',
-            },
-        ],
+        domains: ['replicate.delivery', 'flrwopbwgfshqjaskbcj.supabase.co', 'images.remotePatterns'],
     },
 };
 
