@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -129,6 +129,11 @@ export default function EmojiGenerator() {
     }
   };
 
+  // Sort emojis by likes count in descending order
+  const sortedEmojis = useMemo(() => {
+    return [...emojis].sort((a, b) => b.likes_count - a.likes_count);
+  }, [emojis]);
+
   return (
     <div>
       {isSignedIn ? (
@@ -154,7 +159,7 @@ export default function EmojiGenerator() {
             Total Emojis Generated: {emojis.length}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {emojis.map((emoji) => (
+            {sortedEmojis.map((emoji) => (
               <Card key={emoji.id} className="p-4 relative group">
                 <Image src={emoji.image_url} alt={`Generated emoji ${emoji.id}`} width={200} height={200} />
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
